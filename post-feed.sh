@@ -17,7 +17,7 @@ sed -i 's/192.168.1.1/192.168.39.1/g' package/base-files/files/bin/config_genera
 # 修改主机名
 echo "Patching host name"
 sed -i '/uci commit system/i\uci set system.@system[0].hostname='MikuWrt'' package/lean/default-settings/files/zzz-default-settings
-sed -i 's/OpenWrt /MikuWrt /g'
+sed -i 's/OpenWrt /MikuWrt /g' package/lean/default-settings/files/zzz-default-settings
 
 # fix netdata
 rm -rf ./feeds/packages/admin/netdata
@@ -35,15 +35,15 @@ git clone --depth=1 https://github.com/UnblockNeteaseMusic/luci-app-unblocknetea
 # git clone --depth=1 https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk.git mentohust
 # git clone --depth=1 https://github.com/BoringCat/luci-app-mentohust.git
 # minieap
-svn co https://github.com/immortalwrt/packages/trunk/net/minieap ../net/minieap
-svn co https://github.com/immortalwrt/luci/trunk/protocols/luci-proto-minieap
+git clone --depth=1 https://github.com/ysc3839/openwrt-minieap.git
+git clone --depth=1 https://github.com/ysc3839/luci-proto-minieap.git
 # git clone --depth=1 https://github.com/ysc3839/luci-proto-minieap.git
 
 # 配置argon主题
 [ -e ../lean/luci-theme-argon ] && rm -rf ../lean/luci-theme-argon
-git clone -b revert-271-18.06_bing --depth=1 https://github.com/jerrykuku/luci-theme-argon.git
+git clone -b 18.06 --depth=1 https://github.com/jerrykuku/luci-theme-argon.git
 git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config.git
-sed -i 's/luci-theme-bootstrap/luci-theme-argon-18.06/g' $LEDE_ROOT/feeds/luci/collections/luci/Makefile
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' $LEDE_ROOT/feeds/luci/collections/luci/Makefile
 [ -e $LEDE_ROOT/data/argon-background.jpg ] && mv $LEDE_ROOT/data/argon-background.jpg luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 
 # 在线设备列表
@@ -73,7 +73,9 @@ git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git
 # git clone --depth=1 https://github.com/jerrykuku/luci-app-vssr
 
 # passwall
-git clone -b https://github.com/xiaorouji/openwrt-passwall
+git clone https://github.com/xiaorouji/openwrt-passwall
+
+ls -l ./
 
 echo "Leving package/community"
 popd

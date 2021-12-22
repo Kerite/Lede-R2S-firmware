@@ -25,7 +25,7 @@ on:
         default: 'false'
       cache:
         description: 'Enable cache'
-        required: false
+        required: true
         default: 'true'
 
 env:
@@ -92,7 +92,7 @@ jobs:
 
     - name: Cache
       uses: klever1988/cachewrtbuild@main
-      if: (github.event.inputs.cache == 'true' && github.event.inputs.cache != 'false') || !contains(github.event.action, 'cache')
+      if: (github.event.inputs.cache == 'true' && github.event.inputs.cache != 'false')
       with:
         ccache: 'true'
         prefix: ${{ github.workspace }}/openwrt
