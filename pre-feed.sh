@@ -19,8 +19,3 @@
 # echo 'src-git small https://github.com/kenzok8/small' >> feeds.conf.default
 alias pushd='pushd $1 > /dev/null'
 alias popd='popd $1 > /dev/null'
-
-[ -e feeds ] && mkdirs feeds
-pushd feeds
-
-popd
